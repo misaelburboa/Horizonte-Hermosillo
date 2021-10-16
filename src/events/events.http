@@ -1,0 +1,8 @@
+### Sign Up a user
+POST http://localhost:4000/events
+content-type: application/json
+
+{
+	"name": "Reunion de Domingo",
+  "date": "2021/03/18"
+}
