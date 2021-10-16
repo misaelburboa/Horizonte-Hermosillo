@@ -1,6 +1,8 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Serialize } from '../interceptors/serialize.interceptor';
 import { UserDto } from './dto/user.dto';
 
+@Serialize(UserDto)
 @Controller('auth')
 export class UsersController {
   @Get()
@@ -10,7 +12,6 @@ export class UsersController {
 
   @Post('signup')
   signUp(@Body() body: UserDto) {
-    console.log(body);
     return body;
   }
 }
