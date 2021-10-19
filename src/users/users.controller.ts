@@ -1,4 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { CreateUserResponseDto } from './dto/create-user-response.dto';
 import { CreateUserDto } from './dto/create-user.dto';
