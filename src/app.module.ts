@@ -6,13 +6,15 @@ import { AppService } from './app.service';
 import { ReservationsModule } from './reservations/reservations.module';
 import { UsersModule } from './users/users.module';
 import { EventsModule } from './events/events.module';
+import { Event } from './events/event.entity';
+import { User } from './users/user.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'horizontehermosillo',
-      entities: [],
+      database: 'horizontehermosillo.sqlite',
+      entities: [Event, User],
       synchronize: true,
     }),
     ReservationsModule,

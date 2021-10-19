@@ -1,17 +1,18 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { Serialize } from '../interceptors/serialize.interceptor';
-import { UserDto } from './dto/user.dto';
+import { Body, Controller, Post } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { Repository } from 'typeorm';
+import { CreateUserDto } from './dto/create-user.dto';
+import { User } from './user.entity';
+import { UsersService } from './users.service';
 
-@Serialize(UserDto)
-@Controller('auth')
+@Serialize(CreateUserDto)
+@Controller('users')
 export class UsersController {
-  @Get()
-  index() {
-    return 'This is the Users Module Index';
-  }
+  constructor(private usersService: UsersService) {}
 
-  @Post('signup')
-  signUp(@Body() body: UserDto) {
-    return body;
+  @Post()
+  create(@Body() userDto: CreateUserDto) {
+    this.usersService.create(userDto);
   }
 }

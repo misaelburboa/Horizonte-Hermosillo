@@ -1,7 +1,8 @@
-import { Column } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity()
 export class Event {
-  @Column()
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column()
