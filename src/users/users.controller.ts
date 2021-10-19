@@ -12,7 +12,7 @@ export class UsersController {
   @Serialize(CreateUserResponseDto)
   async create(@Body() userDto: CreateUserDto) {
     const user = await this.usersService.create(userDto);
-    console.log(user);
+
     return user;
   }
 }
