@@ -5,6 +5,10 @@ export class CreateUserDto {
   username: string;
 
   @IsString()
+  @ValidateIf(
+    ({ password }) =>
+      password !== null && password !== undefined && password !== '',
+  )
   password: string;
 
   @IsEmail()

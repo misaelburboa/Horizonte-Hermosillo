@@ -17,7 +17,6 @@ export class UsersService {
 
   // TODO: Check if the current user is admin to access this route
   async create(userDto: CreateUserDto) {
-    console.log("entro");
     // TODO: Contemplate the other user creation scenarios, for now, we'll just consider
     // the username for the validation of the email
     const users = await this.usersRepository.find({ email: userDto.email });
@@ -25,8 +24,6 @@ export class UsersService {
     if (users.length) {
       throw new BadRequestException(USER_EXISTS);
     }
-
-    const hashedPassword = this.hashPassword(userDto.password);
 
     const { username, email, name, phone, isAdmin = false } = userDto;
 
@@ -36,11 +33,14 @@ export class UsersService {
       name,
       phone,
       isAdmin,
-      hashedPassword,
     };
-    console.log(userObj);
     const user = this.usersRepository.create(userObj);
-    this.usersRepository.save(user);
+
+    if (userDto.password) {
+      user.password = await this.hashPassword(userDto.password);
+    }
+
+    return this.usersRepository.save(user);
   }
 
   async hashPassword(plainPassword: string) {
