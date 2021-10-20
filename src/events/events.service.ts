@@ -31,6 +31,8 @@ export class EventsService {
       throw new NotFoundException('Event Not Found');
     }
 
+    // TODO: Check the availability of the desire type of seat
+
     const attendee = this.attendeesRepo.create(classToPlain(attendeeDto));
     attendee.event = event;
     attendee.cancellationCode = this.generateCancellationCode();

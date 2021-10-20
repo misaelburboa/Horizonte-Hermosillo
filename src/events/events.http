@@ -17,6 +17,5 @@ content-type: application/json
   "attendeeFullName": "Misael Burboa",
   "secondAttendeeFullName": "Alejandro Burboa",
   "phone1": "+526621836340",
-  "seatType": "single",
-  "cancellationCode": ""
+  "seatType": "single"
 }

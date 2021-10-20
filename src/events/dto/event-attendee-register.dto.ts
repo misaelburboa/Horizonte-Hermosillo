@@ -40,6 +40,7 @@ export class EventAttendeeRegisterDto {
   @IsEnum(SeatType)
   seatType: SeatType;
 
+  @IsOptional()
   @IsString()
   cancellationCode: string;
 }
