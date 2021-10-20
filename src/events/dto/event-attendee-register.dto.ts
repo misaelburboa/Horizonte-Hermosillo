@@ -1,12 +1,13 @@
 import {
   IsAlpha,
   IsEnum,
+  IsOptional,
   IsPhoneNumber,
   IsString,
   ValidateIf,
 } from 'class-validator';
 
-enum SeatType {
+export enum SeatType {
   SINGLE = 'single',
   DOUBLE = 'double',
 }
@@ -17,20 +18,28 @@ export class EventAttendeeRegisterDto {
   @IsString()
   @IsAlpha()
   @ValidateIf(({ seatType }) => isDoubleSeatRequest(seatType))
-  name: string;
+  attendeeFullName: string;
 
   @IsString()
   @ValidateIf(({ seatType }) => isDoubleSeatRequest(seatType))
-  secondName?: string;
+  secondAttendeeFullName?: string;
 
   @IsString()
   @IsPhoneNumber()
-  mainPhone: string;
+  phone1: string;
 
+  @IsOptional()
   @IsString()
   @IsPhoneNumber()
-  secondPhone?: string;
+  phone2?: string;
+
+  @IsString()
+  @IsOptional()
+  seatNumber?: string;
 
   @IsEnum(SeatType)
   seatType: SeatType;
+
+  @IsString()
+  cancellationCode: string;
 }

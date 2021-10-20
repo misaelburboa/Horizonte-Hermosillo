@@ -8,7 +8,8 @@ import { UsersModule } from './users/users.module';
 import { EventsModule } from './events/events.module';
 import { Event } from './events/event.entity';
 import { User } from './users/user.entity';
-import { Attendee } from './events/atendees.entity';
+import { Attendee } from './events/attendees.entity';
+import { AttendeeRegistrationSubscriber } from './subscribers/AttendeeRegistrationSubscriber';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { Attendee } from './events/atendees.entity';
       type: 'sqlite',
       database: 'horizontehermosillo.sqlite',
       entities: [Event, User, Attendee],
+      subscribers: [AttendeeRegistrationSubscriber],
       synchronize: true,
     }),
     ReservationsModule,

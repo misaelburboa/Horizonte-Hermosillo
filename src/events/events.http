@@ -4,5 +4,19 @@ content-type: application/json
 
 {
 	"name": "Reunion de Domingo",
-  "date": "2021/03/18"
+	"date": "2021/03/18",
+	"singleSeatsNumber": 24,
+	"doubleSeatsNumber": 24
+}
+
+### Register to an event
+POST http://localhost:4000/events/1/register
+content-type: application/json
+
+{
+  "attendeeFullName": "Misael Burboa",
+  "secondAttendeeFullName": "Alejandro Burboa",
+  "phone1": "+526621836340",
+  "seatType": "single",
+  "cancellationCode": ""
 }
