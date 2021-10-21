@@ -18,7 +18,7 @@ export class Attendee {
   @Column({ nullable: true })
   phone2?: string;
 
-  @Column()
+  @Column({ nullable: true })
   seatNumber?: string;
 
   @Column()
