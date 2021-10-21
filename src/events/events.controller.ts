@@ -18,7 +18,7 @@ export class EventsController {
   constructor(private eventsService: EventsService) {}
   @Get()
   getAllEvents() {
-    this.eventsService.getAll();
+    return this.eventsService.getAll();
   }
 
   @Get('/:id')

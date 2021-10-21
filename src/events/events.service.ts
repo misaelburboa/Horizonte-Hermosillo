@@ -28,9 +28,10 @@ export class EventsService {
   }
 
   async getAll() {
-    // TODO: Implement this
     // TODO: Add pagination
-    return 'asd';
+    return await this.eventsRepo.find({
+      relations: ['attendees'],
+    });
   }
 
   create(eventDto: CreateEventDto) {
