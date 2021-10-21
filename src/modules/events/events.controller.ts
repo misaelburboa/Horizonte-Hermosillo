@@ -8,7 +8,7 @@ import {
   Query,
   UseInterceptors,
 } from '@nestjs/common';
-import { Serialize } from '../interceptors/serialize.interceptor';
+import { Serialize } from '../../interceptors/serialize.interceptor';
 import { CreateEventDto } from './dto/create-event.dto';
 import { EventAttendeeRegisterDto } from './dto/event-attendee-register.dto';
 import { PaginationDto } from './dto/pagination.dto';
@@ -21,7 +21,6 @@ export class EventsController {
 
   @Get()
   getAllEvents(@Query() params: PaginationDto) {
-    console.log(params);
     return this.eventsService.getAll(params);
   }
 

@@ -1,6 +1,6 @@
-import { Attendee } from 'src/events/attendees.entity';
-import { SeatType } from 'src/events/dto/event-attendee-register.dto';
-import { Event } from 'src/events/event.entity';
+import { Attendee } from 'src/modules/events/attendees.entity';
+import { SeatType } from 'src/modules/events/dto/event-attendee-register.dto';
+import { Event } from 'src/modules/events/event.entity';
 import {
   EntitySubscriberInterface,
   EventSubscriber,

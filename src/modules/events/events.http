@@ -17,7 +17,7 @@ content-type: application/json
 }
 
 ### Register to an event
-POST http://localhost:4000/events/1/register
+POST http://localhost:4000/events/2/register
 content-type: application/json
 
 {

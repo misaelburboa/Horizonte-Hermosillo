@@ -4,12 +4,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ReservationsModule } from './reservations/reservations.module';
-import { UsersModule } from './users/users.module';
 import { EventsModule } from './events/events.module';
 import { Event } from './events/event.entity';
 import { User } from './users/user.entity';
 import { Attendee } from './events/attendees.entity';
-import { AttendeeRegistrationSubscriber } from './subscribers/AttendeeRegistrationSubscriber';
+import { AttendeeRegistrationSubscriber } from '../subscribers/AttendeeRegistrationSubscriber';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
