@@ -27,6 +27,16 @@ export class Event {
   @Column()
   doubleSeatsNumber: number;
 
+  @Column({
+    default: false,
+  })
+  isActive: boolean;
+
+  @Column({
+    default: false,
+  })
+  isDeleted: boolean;
+
   @OneToMany(() => Attendee, (attendee) => attendee.event)
   attendees: Attendee[];
 }

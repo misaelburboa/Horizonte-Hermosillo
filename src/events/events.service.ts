@@ -9,8 +9,16 @@ import {
   SeatType,
 } from './dto/event-attendee-register.dto';
 import { Event } from './event.entity';
-import { NOT_FOUND_EXCEPTION_MESSAGE, NO_SEAT_AVAILABLE } from './constants';
-import { NoSeatAvailableException } from './exceptions';
+import {
+  NOT_ACTIVE_EVENT_MESSAGE,
+  NOT_FOUND_EXCEPTION_MESSAGE,
+  NO_SEAT_AVAILABLE_MESSAGE,
+} from './constants';
+import {
+  NoSeatAvailableException,
+  NotActiveEventException,
+} from './exceptions';
+import { PaginationDto } from './dto/pagination.dto';
 
 @Injectable()
 export class EventsService {
@@ -19,7 +27,6 @@ export class EventsService {
     @InjectRepository(Attendee) private attendeesRepo: Repository<Attendee>,
   ) {}
 
-  // TODO: add pagination
   async get(id: string) {
     return await this.eventsRepo.find({
       where: { id },
@@ -27,10 +34,12 @@ export class EventsService {
     });
   }
 
-  async getAll() {
-    // TODO: Add pagination
+  // TODO: Create a pagination Service or something like that
+  async getAll({ page, pageSize }: PaginationDto) {
     return await this.eventsRepo.find({
       relations: ['attendees'],
+      take: pageSize,
+      skip: (page - 1) * pageSize,
     });
   }
 
@@ -46,6 +55,7 @@ export class EventsService {
   ) {
     const eventEntity = await this.getEventEntity(eventId);
 
+    this.checkIfEventIsActive(eventEntity);
     this.checkSeatAvailability(attendeeDto.seatType, eventEntity);
 
     const attendee = this.attendeesRepo.create(classToPlain(attendeeDto));
@@ -53,6 +63,12 @@ export class EventsService {
     attendee.cancellationCode = this.generateCancellationCode();
 
     return await this.attendeesRepo.save(attendee);
+  }
+
+  private checkIfEventIsActive(eventEntity: Event) {
+    if (!eventEntity.isActive || eventEntity.isDeleted) {
+      throw new NotActiveEventException(NOT_ACTIVE_EVENT_MESSAGE);
+    }
   }
 
   private generateCancellationCode() {
@@ -82,11 +98,11 @@ export class EventsService {
 
   private checkSeatAvailability(seatType: SeatType, event: Event) {
     if (seatType === SeatType.SINGLE && event.singleSeatsNumber <= 0) {
-      throw new NoSeatAvailableException(NO_SEAT_AVAILABLE);
+      throw new NoSeatAvailableException(NO_SEAT_AVAILABLE_MESSAGE);
     }
 
     if (seatType === SeatType.DOUBLE && event.singleSeatsNumber <= 0) {
-      throw new NoSeatAvailableException(NO_SEAT_AVAILABLE);
+      throw new NoSeatAvailableException(NO_SEAT_AVAILABLE_MESSAGE);
     }
   }
 }

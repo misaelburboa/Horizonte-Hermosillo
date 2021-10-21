@@ -5,20 +5,24 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UseInterceptors,
 } from '@nestjs/common';
 import { Serialize } from '../interceptors/serialize.interceptor';
 import { CreateEventDto } from './dto/create-event.dto';
 import { EventAttendeeRegisterDto } from './dto/event-attendee-register.dto';
+import { PaginationDto } from './dto/pagination.dto';
 import { EventsService } from './events.service';
 
 @Controller('events')
 @UseInterceptors(ClassSerializerInterceptor)
 export class EventsController {
   constructor(private eventsService: EventsService) {}
+
   @Get()
-  getAllEvents() {
-    return this.eventsService.getAll();
+  getAllEvents(@Query() params: PaginationDto) {
+    console.log(params);
+    return this.eventsService.getAll(params);
   }
 
   @Get('/:id')
