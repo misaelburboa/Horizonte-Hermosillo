@@ -1,4 +1,11 @@
-### Sign Up a user
+
+### Retrieve list of events
+GET http://localhost:4000/events
+
+### Retrieve a single event by id
+GET http://localhost:4000/events/1
+
+### Register an event
 POST http://localhost:4000/events
 content-type: application/json
 

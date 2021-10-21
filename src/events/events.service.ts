@@ -19,6 +19,20 @@ export class EventsService {
     @InjectRepository(Attendee) private attendeesRepo: Repository<Attendee>,
   ) {}
 
+  // TODO: add pagination
+  async get(id: string) {
+    return await this.eventsRepo.find({
+      where: { id },
+      relations: ['attendees'],
+    });
+  }
+
+  async getAll() {
+    // TODO: Implement this
+    // TODO: Add pagination
+    return 'asd';
+  }
+
   create(eventDto: CreateEventDto) {
     const event = this.eventsRepo.create(classToPlain(eventDto));
 

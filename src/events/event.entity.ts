@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Attendee } from './attendees.entity';
 
 @Entity()
@@ -21,6 +27,6 @@ export class Event {
   @Column()
   doubleSeatsNumber: number;
 
-  @ManyToOne(() => Attendee, (attendee) => attendee.event)
+  @OneToMany(() => Attendee, (attendee) => attendee.event)
   attendees: Attendee[];
 }
