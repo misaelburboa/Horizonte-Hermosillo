@@ -10,7 +10,6 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
-import { Serialize } from '../../interceptors/serialize.interceptor';
 import { CreateEventDto } from './dto/create-event.dto';
 import { EventAttendeeRegisterDto } from './dto/event-attendee-register.dto';
 import { PaginationDto } from './dto/pagination.dto';
