@@ -6,8 +6,10 @@ import {
   Param,
   Post,
   Query,
+  UseFilters,
   UseInterceptors,
 } from '@nestjs/common';
+import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 import { Serialize } from '../../interceptors/serialize.interceptor';
 import { CreateEventDto } from './dto/create-event.dto';
 import { EventAttendeeRegisterDto } from './dto/event-attendee-register.dto';
@@ -16,12 +18,13 @@ import { EventsService } from './events.service';
 
 @Controller('events')
 @UseInterceptors(ClassSerializerInterceptor)
+@UseFilters(HttpExceptionFilter)
 export class EventsController {
   constructor(private eventsService: EventsService) {}
 
   @Get()
-  getAllEvents(@Query() params: PaginationDto) {
-    return this.eventsService.getAll(params);
+  async getAllEvents(@Query() params: PaginationDto) {
+    return await this.eventsService.getAll(params);
   }
 
   @Get('/:id')
@@ -37,10 +40,10 @@ export class EventsController {
   }
 
   @Post('/:id/register')
-  registerAttendeeToEvent(
+  async registerAttendeeToEvent(
     @Param('id') id: string,
     @Body() attendee: EventAttendeeRegisterDto,
   ) {
-    this.eventsService.registerAttendeeToEvent(id, attendee);
+    await this.eventsService.registerAttendeeToEvent(id, attendee);
   }
 }

@@ -1,9 +1,0 @@
-### Sign Up a user
-POST http://localhost:4000/reservations
-content-type: application/json
-
-{
-	"event": "123d-123a-asd3-qweva",
-	"name": "Misael Burboa",
-	"phone": "6621836340"
-}
