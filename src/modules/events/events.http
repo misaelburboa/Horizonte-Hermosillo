@@ -19,6 +19,12 @@ content-type: application/json
 	"doubleSeatsNumber": 24
 }
 
+### Retrieve a single event by id
+PATCH http://localhost:4000/events/1/activate
+
+### Retrieve a single event by id
+PATCH http://localhost:4000/events/1/deactivate
+
 ### Register to an event
 POST http://localhost:4000/events/1/register
 content-type: application/json

@@ -22,6 +22,16 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+## Initial Schema
+
+```bash
+$ npm run typeorm migration:generate -- -n initial-schema -o
+```
+
+## Run Migrations
+```bash
+$ npm run typeorm migration:run
+```
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.

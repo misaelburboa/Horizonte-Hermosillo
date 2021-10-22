@@ -60,6 +60,18 @@ export class EventsService {
     return await this.eventsRepo.save(event);
   }
 
+  async activateEvent(id: string) {
+    const event = await this.eventsRepo.findOne(id);
+    event.isActive = true;
+    return this.eventsRepo.save(event);
+  }
+
+  async deactivateEvent(id: string) {
+    const event = await this.eventsRepo.findOne(id);
+    event.isActive = false;
+    return this.eventsRepo.save(event);
+  }
+
   async registerAttendeeToEvent(
     eventId: string,
     attendeeDto: EventAttendeeRegisterDto,

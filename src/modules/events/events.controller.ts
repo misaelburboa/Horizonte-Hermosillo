@@ -4,6 +4,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Query,
   UseFilters,
@@ -30,6 +31,19 @@ export class EventsController {
   async getEvent(@Param('id') id: string) {
     return await this.eventsService.get(id);
   }
+
+  @Patch('/:id/activate')
+  // TODO: This should be closed and only admins can do this
+  async activateEvent(@Param('id') id: string) {
+    return await this.eventsService.activateEvent(id);
+  }
+
+  @Patch('/:id/deactivate')
+  // TODO: This should be closed and only admins can do this
+  async deactivate(@Param('id') id: string) {
+    return await this.eventsService.deactivateEvent(id);
+  }
+
   @Get('/:id/attendees')
   async getEventAttendees(@Param('id') eventId: string) {
     const attendees = await this.eventsService.getEventAttendees(eventId);
@@ -47,6 +61,6 @@ export class EventsController {
     @Param('id') id: string,
     @Body() attendee: EventAttendeeRegisterDto,
   ) {
-    await this.eventsService.registerAttendeeToEvent(id, attendee);
+    return await this.eventsService.registerAttendeeToEvent(id, attendee);
   }
 }

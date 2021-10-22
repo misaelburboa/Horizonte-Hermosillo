@@ -9,9 +9,14 @@ import { EventsModule } from './events/events.module';
 import { Event } from './events/event.entity';
 import { User } from './users/user.entity';
 import { Attendee } from './events/attendees.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: `.env.${process.env.NODE_ENV}`,
+    }),
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'horizontehermosillo.sqlite',
