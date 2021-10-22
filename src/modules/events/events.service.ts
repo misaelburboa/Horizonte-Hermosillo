@@ -35,6 +35,15 @@ export class EventsService {
     });
   }
 
+  async getEventAttendees(eventId) {
+    return await this.eventsRepo
+      .createQueryBuilder('event')
+      .innerJoinAndSelect('event.attendees', 'attendee')
+      .where('event.id = :eventId', { eventId })
+      .andWhere('attendee.isCancel = :isCancel', { isCancel: false })
+      .getMany();
+  }
+
   // TODO: Create a pagination Service or something like that
   // TODO: make the proper changes for not considering the registers cancelled
   async getAll({ page, pageSize }: PaginationDto) {
@@ -81,7 +90,7 @@ export class EventsService {
       throw new NotFoundException(REGISTER_NOT_FOUND_MESSAGE);
     }
 
-    register.isActive = false;
+    register.isCancel = true;
     return await this.attendeesRepo.save(register);
   }
 

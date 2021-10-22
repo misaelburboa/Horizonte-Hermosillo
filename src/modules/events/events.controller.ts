@@ -31,6 +31,12 @@ export class EventsController {
   async getEvent(@Param('id') id: string) {
     return await this.eventsService.get(id);
   }
+  @Get('/:id/attendees')
+  async getEventAttendees(@Param('id') eventId: string) {
+    const attendees = await this.eventsService.getEventAttendees(eventId);
+    console.log(attendees);
+    return attendees;
+  }
 
   @Post()
   async create(@Body() event: CreateEventDto) {

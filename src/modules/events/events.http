@@ -5,6 +5,9 @@ GET http://localhost:4000/events?page=1&pageSize=2
 ### Retrieve a single event by id
 GET http://localhost:4000/events/1
 
+### Gets the attendees are expected to asist
+GET http://localhost:4000/events/1/attendees
+
 ### Register an event
 POST http://localhost:4000/events
 content-type: application/json
@@ -28,4 +31,4 @@ content-type: application/json
 }
 
 ### Cancel register to an event
-PATCH http://localhost:4000/register/cancel?code=ZOLGRTZS
+PATCH http://localhost:4000/register/cancel?code=CTSS7QO4

@@ -43,8 +43,8 @@ export class AttendeeRegistrationSubscriber
     // of seats available by one
     // basically: if change to cancelled and in database is not cancelled, go for it, increase seats number
     if (
-      !attendeeEntity.isActive &&
-      attendeeEntity.isActive !== attendeeDbEntity.isActive
+      attendeeEntity.isCancel &&
+      attendeeEntity.isCancel !== attendeeDbEntity.isCancel
     ) {
       const eventId = attendeeEntity.event.id;
       const eventEntity = await eventsRepository.findOne(eventId);
