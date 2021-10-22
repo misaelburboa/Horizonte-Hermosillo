@@ -32,11 +32,9 @@ export class EventsController {
     return await this.eventsService.get(id);
   }
 
-  @Serialize(CreateEventDto)
   @Post()
-  create(@Body() event: CreateEventDto) {
-    this.eventsService.create(event);
-    return event;
+  async create(@Body() event: CreateEventDto) {
+    return await this.eventsService.create(event);
   }
 
   @Post('/:id/register')

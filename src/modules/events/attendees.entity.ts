@@ -27,6 +27,11 @@ export class Attendee {
   @Column()
   cancellationCode: string;
 
+  @Column({
+    default: true,
+  })
+  isActive: boolean;
+
   @ManyToOne(() => Event, (event) => event.attendees)
   event: Event;
 }

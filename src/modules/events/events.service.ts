@@ -13,6 +13,7 @@ import {
   NOT_ACTIVE_EVENT_MESSAGE,
   NOT_FOUND_EXCEPTION_MESSAGE,
   NO_SEAT_AVAILABLE_MESSAGE,
+  REGISTER_NOT_FOUND_MESSAGE,
 } from './constants';
 import {
   NoSeatAvailableException,
@@ -35,6 +36,7 @@ export class EventsService {
   }
 
   // TODO: Create a pagination Service or something like that
+  // TODO: make the proper changes for not considering the registers cancelled
   async getAll({ page, pageSize }: PaginationDto) {
     return await this.eventsRepo.find({
       relations: ['attendees'],
@@ -43,10 +45,10 @@ export class EventsService {
     });
   }
 
-  create(eventDto: CreateEventDto) {
+  async create(eventDto: CreateEventDto) {
     const event = this.eventsRepo.create(classToPlain(eventDto));
 
-    this.eventsRepo.save(event);
+    return await this.eventsRepo.save(event);
   }
 
   async registerAttendeeToEvent(
@@ -63,6 +65,24 @@ export class EventsService {
     attendee.cancellationCode = this.generateCancellationCode();
 
     return await this.attendeesRepo.save(attendee);
+  }
+
+  async cancelRegister(cancellationCode) {
+    // TODO: Send emails, whatsapp or whatever
+    // TODO: Check if apply some waiting, list if so, look for the one in the top of that queue and assign the space free
+    const [register] = await this.attendeesRepo.find({
+      where: {
+        cancellationCode,
+      },
+      relations: ['event'],
+    });
+
+    if (!register) {
+      throw new NotFoundException(REGISTER_NOT_FOUND_MESSAGE);
+    }
+
+    register.isActive = false;
+    return await this.attendeesRepo.save(register);
   }
 
   private checkIfEventIsActive(eventEntity: Event) {
