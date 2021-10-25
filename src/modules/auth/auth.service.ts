@@ -18,32 +18,6 @@ export class AuthService {
     return await this.usersService.create(userDto);
   }
 
-  // async signIn(authCredentialsDto: AuthCredentialsDto) {
-  //   const user = await this.usersService.getUserByUsername(
-  //     authCredentialsDto.username,
-  //   );
-
-  //   if (!user) {
-  //     throw new UnauthorizedException('Bad Credentials');
-  //   }
-
-  //   const [salt, storedHash] = user.password.split('.');
-
-  //   const hash = (await scrypt(
-  //     authCredentialsDto.password,
-  //     salt,
-  //     32,
-  //   )) as Buffer;
-
-  //   if (storedHash !== hash.toString('hex')) {
-  //     throw new UnauthorizedException('Bad Credentials');
-  //   }
-
-  //   delete user.password;
-
-  //   return user;
-  // }
-
   async signIn(user: any) {
     const payload = { username: user.username, sub: user.userId };
     return { access_token: this.jwtService.sign(payload) };

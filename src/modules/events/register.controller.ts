@@ -1,7 +1,9 @@
 import { Controller, Patch, Query, UseFilters } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 import { EventsService } from './events.service';
 
+@ApiTags('Register')
 @Controller('register')
 @UseFilters(HttpExceptionFilter)
 export class RegisterController {

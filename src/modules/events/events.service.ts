@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { classToPlain } from 'class-transformer';
 import { Repository } from 'typeorm';
@@ -21,6 +25,7 @@ import {
   NotActiveEventException,
 } from './exceptions';
 import { PaginationDto } from './dto/pagination.dto';
+import { CANCELLATION_CODE_NEEDED } from '../auth/constants';
 
 @Injectable()
 export class EventsService {
@@ -99,6 +104,9 @@ export class EventsService {
   async cancelRegister(cancellationCode) {
     // TODO: Send emails, whatsapp or whatever
     // TODO: Check if apply some waiting, list if so, look for the one in the top of that queue and assign the space free
+    if (!cancellationCode) {
+      throw new BadRequestException(CANCELLATION_CODE_NEEDED);
+    }
     const [register] = await this.attendeesRepo.find({
       where: {
         cancellationCode,
