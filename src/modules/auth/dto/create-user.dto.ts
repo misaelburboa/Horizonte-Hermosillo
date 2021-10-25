@@ -15,7 +15,6 @@ import {
 } from '../constants';
 
 export class CreateUserDto {
-  // TODO: store the values of validations in constants
   @IsString()
   @MinLength(USERNAME_MIN_LENGTH)
   @MaxLength(USERNAME_MAX_LENGTH)

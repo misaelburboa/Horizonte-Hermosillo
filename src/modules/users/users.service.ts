@@ -45,7 +45,6 @@ export class UsersService {
 
   async getUserByUsername(username: string) {
     const [user] = await this.usersRepository.find({ username });
-    // TODO: check if it can be return without being array
     return user;
   }
 

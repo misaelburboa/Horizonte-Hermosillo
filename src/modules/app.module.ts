@@ -11,7 +11,7 @@ import { User } from './users/user.entity';
 import { Attendee } from './events/attendees.entity';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-// TODO: apply configs based on environment
+
 @Module({
   imports: [
     ConfigModule.forRoot({
