@@ -1,0 +1,21 @@
+### Login
+POST http://localhost:4000/auth/signin
+content-type: application/json
+
+{
+  "username": "misaelburboa",
+  "password": "MySuperCoolPass!123"
+}
+
+
+### Sign Up a user
+POST http://localhost:4000/auth/signup
+content-type: application/json
+
+{
+  "username": "misaelburboa",
+  "email": "cmburboa@gmail.com",
+  "password": "MySuperCoolPass!123",
+  "name": "Misael Burboa",
+  "phone": "6621836340"
+}

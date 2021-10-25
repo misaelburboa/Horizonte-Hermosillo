@@ -40,4 +40,24 @@ export class AuthService {
 
     return user;
   }
+
+  async validateUser(username: string, password: string) {
+    const user = await this.usersService.getUserByUsername(username);
+
+    if (!user) {
+      throw new UnauthorizedException('Bad Credentials');
+    }
+
+    const [salt, storedHash] = user.password.split('.');
+
+    const hash = (await scrypt(password, salt, 32)) as Buffer;
+
+    if (storedHash !== hash.toString('hex')) {
+      throw new UnauthorizedException('Bad Credentials');
+    }
+
+    delete user.password;
+
+    return user;
+  }
 }

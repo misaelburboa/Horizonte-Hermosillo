@@ -1,10 +1,26 @@
-import { IsBoolean, IsEmail, IsString, ValidateIf } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsString,
+  Matches,
+  MaxLength,
+  MinLength,
+  ValidateIf,
+} from 'class-validator';
 
 export class CreateUserDto {
+  // TODO: store the values of validations in constants
   @IsString()
+  @MinLength(4)
+  @MaxLength(25)
   username: string;
 
   @IsString()
+  @MinLength(8)
+  @MaxLength(20)
+  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
+    message: 'Password too week',
+  })
   @ValidateIf(
     ({ password }) =>
       password !== null && password !== undefined && password !== '',
