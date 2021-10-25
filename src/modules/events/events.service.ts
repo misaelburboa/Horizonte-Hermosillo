@@ -45,7 +45,6 @@ export class EventsService {
   }
 
   // TODO: Create a pagination Service or something like that
-  // TODO: make the proper changes for not considering the registers cancelled
   async getAll({ page, pageSize }: PaginationDto) {
     return await this.eventsRepo.find({
       relations: ['attendees'],

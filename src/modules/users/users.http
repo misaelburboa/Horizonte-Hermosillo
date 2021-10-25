@@ -4,7 +4,8 @@ content-type: application/json
 
 {
   "username": "misaelburboa",
-  "email": "cmburboa6@gmail.com",
+  "email": "cmburboa@gmail.com",
+  "password": "MySuperCoolPass!123",
   "name": "Misael Burboa",
   "phone": "6621836340"
 }
