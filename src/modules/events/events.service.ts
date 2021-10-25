@@ -10,6 +10,7 @@ import {
 } from './dto/event-attendee-register.dto';
 import { Event } from './event.entity';
 import {
+  ACTIVATE_DEACTIVATE_EVENT_NOT_FOUND,
   NOT_ACTIVE_EVENT_MESSAGE,
   NOT_FOUND_EXCEPTION_MESSAGE,
   NO_SEAT_AVAILABLE_MESSAGE,
@@ -61,12 +62,20 @@ export class EventsService {
 
   async activateEvent(id: string) {
     const event = await this.eventsRepo.findOne(id);
+    if (!event) {
+      throw new NotFoundException(ACTIVATE_DEACTIVATE_EVENT_NOT_FOUND);
+    }
+
     event.isActive = true;
     return this.eventsRepo.save(event);
   }
 
   async deactivateEvent(id: string) {
     const event = await this.eventsRepo.findOne(id);
+    if (!event) {
+      throw new NotFoundException(ACTIVATE_DEACTIVATE_EVENT_NOT_FOUND);
+    }
+
     event.isActive = false;
     return this.eventsRepo.save(event);
   }

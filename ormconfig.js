@@ -9,18 +9,24 @@ const dbConfig = {
 switch (process.env.NODE_ENV) {
   case 'development':
     Object.assign(dbConfig, {
-      type: 'sqlite',
-      database: 'horizontehermosillo.sqlite',
+      type: 'postgres',
+      host: 'localhost',
+      username: 'postgres',
+      password: 'root',
+      database: 'horizontehermosillo',
       entities: ['**/*.entity.js'],
       subscribers: ['**/*.subscriber.js'],
     });
     break;
   case 'test':
     Object.assign(dbConfig, {
-      type: 'sqlite',
-      database: 'horizontehermosillo.test.sqlite',
-      entities: ['**/*.entity.ts'],
-      subscribers: ['**/*.subscriber.ts'],
+      type: 'postgres',
+      host: 'localhost',
+      username: 'postgres',
+      password: 'root',
+      database: 'test-horizontehermosillo',
+      entities: ['**/*.entity.js'],
+      subscribers: ['**/*.subscriber.js'],
       migrationsRun: true,
     });
     break;

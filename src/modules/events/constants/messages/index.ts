@@ -5,3 +5,6 @@ export const NOT_ACTIVE_EVENT_MESSAGE =
   "You're attempting to register an event that is not active";
 export const REGISTER_NOT_FOUND_MESSAGE =
   "The register you're tryig to cancel does not exists";
+
+export const ACTIVATE_DEACTIVATE_EVENT_NOT_FOUND =
+  "The event you're attempting to active/deactivate was not found";
