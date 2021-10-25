@@ -12,6 +12,7 @@ switch (process.env.NODE_ENV) {
       type: 'sqlite',
       database: 'horizontehermosillo.sqlite',
       entities: ['**/*.entity.js'],
+      subscribers: ['**/*.subscriber.js'],
     });
     break;
   case 'test':
@@ -19,6 +20,7 @@ switch (process.env.NODE_ENV) {
       type: 'sqlite',
       database: 'horizontehermosillo.test.sqlite',
       entities: ['**/*.entity.ts'],
+      subscribers: ['**/*.subscriber.ts'],
       migrationsRun: true,
     });
     break;
@@ -28,6 +30,7 @@ switch (process.env.NODE_ENV) {
       url: process.env.DATABASE_URL,
       migrationsRun: true,
       entities: ['**/*.entity.js'],
+      subscribers: ['**/*.subscriber.js'],
       ssl: {
         rejectUnauthorized: false,
       },
