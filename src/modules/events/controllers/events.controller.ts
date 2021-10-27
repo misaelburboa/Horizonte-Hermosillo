@@ -13,11 +13,11 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { CreateEventDto } from './dto/create-event.dto';
-import { EventAttendeeRegisterDto } from './dto/event-attendee-register.dto';
-import { PaginationDto } from './dto/pagination.dto';
-import { EventsService } from './events.service';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { CreateEventDto } from '../dto/create-event.dto';
+import { EventAttendeeRegisterDto } from '../dto/event-attendee-register.dto';
+import { PaginationDto } from '../dto/pagination.dto';
+import { EventsService } from '../services/events.service';
 
 @ApiTags('Events')
 @Controller('events')

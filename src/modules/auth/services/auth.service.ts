@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { UsersService } from '../../users/services/users.service';
+import { CreateUserDto } from '../dto/create-user.dto';
 import { scrypt as _script } from 'crypto';
 import { promisify } from 'util';
 import { JwtService } from '@nestjs/jwt';

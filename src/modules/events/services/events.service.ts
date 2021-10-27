@@ -6,26 +6,26 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { classToPlain } from 'class-transformer';
 import { Repository } from 'typeorm';
-import { Attendee } from './attendees.entity';
-import { CreateEventDto } from './dto/create-event.dto';
+import { Attendee } from '../models/attendees.entity';
+import { CreateEventDto } from '../dto/create-event.dto';
 import {
   EventAttendeeRegisterDto,
   SeatType,
-} from './dto/event-attendee-register.dto';
-import { Event } from './event.entity';
+} from '../dto/event-attendee-register.dto';
+import { Event } from '../models/event.entity';
 import {
   ACTIVATE_DEACTIVATE_EVENT_NOT_FOUND,
   NOT_ACTIVE_EVENT_MESSAGE,
   NOT_FOUND_EXCEPTION_MESSAGE,
   NO_SEAT_AVAILABLE_MESSAGE,
   REGISTER_NOT_FOUND_MESSAGE,
-} from './constants';
+} from '../constants';
 import {
   NoSeatAvailableException,
   NotActiveEventException,
-} from './exceptions';
-import { PaginationDto } from './dto/pagination.dto';
-import { CANCELLATION_CODE_NEEDED } from '../auth/constants';
+} from '../exceptions';
+import { PaginationDto } from '../dto/pagination.dto';
+import { CANCELLATION_CODE_NEEDED } from '../../../modules/auth/constants';
 
 @Injectable()
 export class EventsService {

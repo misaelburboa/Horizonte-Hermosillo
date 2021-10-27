@@ -3,9 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { randomBytes, scrypt as _script } from 'crypto';
 import { Repository } from 'typeorm';
 import { promisify } from 'util';
-import { USER_EXISTS } from './constants/exception-messages';
-import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './user.entity';
+import { USER_EXISTS } from '../constants/exception-messages';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { User } from '../models/user.entity';
 
 const scrypt = promisify(_script);
 
