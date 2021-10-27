@@ -1,5 +1,7 @@
 import {
   BadRequestException,
+  HttpException,
+  HttpStatus,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -26,12 +28,13 @@ import {
 } from '../exceptions';
 import { PaginationDto } from '../dto/pagination.dto';
 import { CANCELLATION_CODE_NEEDED } from '../../../modules/auth/constants';
-
+import { TwilioMessageService } from './twilio-message.service';
 @Injectable()
 export class EventsService {
   constructor(
     @InjectRepository(Event) private eventsRepo: Repository<Event>,
     @InjectRepository(Attendee) private attendeesRepo: Repository<Attendee>,
+    private twilioMessageService: TwilioMessageService,
   ) {}
 
   async get(id: string) {
@@ -98,7 +101,21 @@ export class EventsService {
     attendee.event = eventEntity;
     attendee.cancellationCode = this.generateCancellationCode();
 
-    return await this.attendeesRepo.save(attendee);
+    let attendeeSaved = null;
+    try {
+      attendeeSaved = await this.attendeesRepo.save(attendee);
+
+      // INFO: This should be placed in the subscriber but NestJS is not supporting injections
+      // on subscribers right now.
+      this.twilioMessageService.sendWhatsAppNotification(
+        'Test Message from SERVICE',
+        attendee.phone1,
+      );
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    return attendeeSaved;
   }
 
   async cancelRegister(cancellationCode) {
