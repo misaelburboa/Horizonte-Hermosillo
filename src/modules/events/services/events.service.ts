@@ -28,13 +28,14 @@ import {
 } from '../exceptions';
 import { PaginationDto } from '../dto/pagination.dto';
 import { CANCELLATION_CODE_NEEDED } from '../../../modules/auth/constants';
-import { TwilioMessageService } from './twilio-message.service';
+import { TwilioNotificationService } from '../../../modules/notifications/services/twilio-notification.service';
+
 @Injectable()
 export class EventsService {
   constructor(
     @InjectRepository(Event) private eventsRepo: Repository<Event>,
     @InjectRepository(Attendee) private attendeesRepo: Repository<Attendee>,
-    private twilioMessageService: TwilioMessageService,
+    private twilioMessageService: TwilioNotificationService,
   ) {}
 
   async get(id: string) {

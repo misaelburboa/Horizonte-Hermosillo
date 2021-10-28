@@ -2,20 +2,31 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Twilio } from 'twilio';
 
-// TODO: implement some creator pattern for this
-class TwilioWhatsAppNotification {
-  body: string;
-  from: string;
-  to: string;
-  constructor(body: string, to: string) {
+class TwilioNotification {
+  protected body;
+  protected from;
+  protected to;
+
+  constructor(body: string, from: string, to: string) {
     this.body = body;
-    this.from = `whatsapp:${process.env.TWILIO_WHATSAPP_FROM_NUMBER}`;
-    this.to = `whatsapp:${to}`;
+    this.from = from;
+    this.to = to;
+  }
+}
+
+// TODO: implement some creator pattern for this
+class TwilioWhatsAppNotification extends TwilioNotification {
+  constructor(body: string, to: string) {
+    super(
+      body,
+      `whatsapp:${process.env.TWILIO_WHATSAPP_FROM_NUMBER}`,
+      `whatsapp:${to}`,
+    );
   }
 }
 
 @Injectable()
-export class TwilioMessageService {
+export class TwilioNotificationService {
   private client;
 
   constructor(private configService: ConfigService) {
