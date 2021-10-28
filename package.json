@@ -90,7 +90,7 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
+    "**/*.{js,jsx,ts,tsx},eslintignore": [
       "npm run lint",
       "npm run format"
     ]
