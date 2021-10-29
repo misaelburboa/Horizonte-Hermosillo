@@ -1,5 +1,5 @@
 ### Login
-POST http://localhost:4000/auth/signin
+POST http://localhost:4000/horizonte-hermosillo/v1/auth/signin
 content-type: application/json
 
 {
@@ -9,7 +9,7 @@ content-type: application/json
 
 
 ### Sign Up a user
-POST http://localhost:4000/auth/signup
+POST http://localhost:4000/horizonte-hermosillo/v1/auth/signup
 content-type: application/json
 
 {

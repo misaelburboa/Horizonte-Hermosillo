@@ -10,6 +10,8 @@ async function bootstrap() {
   app.use(helmet());
   app.enableCors();
 
+  app.setGlobalPrefix('horizonte-hermosillo/v1');
+
   const config = new DocumentBuilder()
     .setTitle('Horizonte Hermosillo Api')
     .setDescription(
@@ -17,9 +19,12 @@ async function bootstrap() {
     )
     .setVersion('0.1.0')
     .addBearerAuth()
+    .setBasePath('horizonte-hermosillo/v1')
     .build();
+
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+
+  SwaggerModule.setup('horizonte-hermosillo/v1/docs', app, document);
 
   await app.listen(process.env.PORT || 4000);
 }

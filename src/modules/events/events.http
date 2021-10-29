@@ -1,15 +1,18 @@
 
 ### Retrieve list of events
-GET http://localhost:4000/events?page=1&pageSize=2
+GET http://localhost:4000/horizonte-hermosillo/v1/events?page=1&pageSize=2
+
+### Retrieve active events
+GET http://localhost:4000/horizonte-hermosillo/v1/events/active
 
 ### Retrieve a single event by id
-GET http://localhost:4000/events/1
+GET http://localhost:4000/horizonte-hermosillo/v1/events/1
 
 ### Gets the attendees are expected to asist
-GET http://localhost:4000/events/1/attendees
+GET http://localhost:4000/horizonte-hermosillo/v1/events/1/attendees
 
 ### Register an event
-POST http://localhost:4000/events
+POST http://localhost:4000/horizonte-hermosillo/v1/events
 content-type: application/json
 
 {
@@ -20,13 +23,13 @@ content-type: application/json
 }
 
 ### Retrieve a single event by id
-PATCH http://localhost:4000/events/1/activate
+PATCH http://localhost:4000/horizonte-hermosillo/v1/events/1/activate
 
 ### Retrieve a single event by id
-PATCH http://localhost:4000/events/1/deactivate
+PATCH http://localhost:4000/horizonte-hermosillo/v1/events/1/deactivate
 
 ### Register to an event
-POST http://localhost:4000/events/1/register
+POST http://localhost:4000/horizonte-hermosillo/v1/events/1/register
 content-type: application/json
 
 {
@@ -37,4 +40,4 @@ content-type: application/json
 }
 
 ### Cancel register to an event
-PATCH http://localhost:4000/register/cancel?code=CTSS7QO4
+PATCH http://localhost:4000/horizonte-hermosillo/v1/register/cancel?code=CTSS7QO4
