@@ -63,6 +63,15 @@ export class EventsService {
     });
   }
 
+  // TODO: Create a pagination Service or something like that
+  async getActiveEvents({ page, pageSize }: PaginationDto) {
+    return await this.eventsRepo.find({
+      where: { isActive: true },
+      take: pageSize,
+      skip: (page - 1) * pageSize,
+    });
+  }
+
   async create(eventDto: CreateEventDto) {
     const event = this.eventsRepo.create(classToPlain(eventDto));
 

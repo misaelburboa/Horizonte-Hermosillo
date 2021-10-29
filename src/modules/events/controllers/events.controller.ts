@@ -33,6 +33,15 @@ export class EventsController {
     return await this.eventsService.getAll(params);
   }
 
+  @Get('active')
+  async getActiveEvents(@Query() params: PaginationDto) {
+    // TODO: Check this returns the correct results
+    return await this.eventsService.getActiveEvents({
+      page: params.page ?? 1,
+      pageSize: params.pageSize ?? 10,
+    });
+  }
+
   @ApiParam({
     name: 'id',
     type: 'String',
@@ -82,9 +91,7 @@ export class EventsController {
   @UseGuards(JwtAuthGuard)
   @Get('/:id/attendees')
   async getEventAttendees(@Param('id') eventId: string) {
-    const attendees = await this.eventsService.getEventAttendees(eventId);
-    console.log(attendees);
-    return attendees;
+    return await this.eventsService.getEventAttendees(eventId);
   }
 
   @ApiBearerAuth()
