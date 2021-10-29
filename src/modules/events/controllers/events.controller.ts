@@ -37,8 +37,8 @@ export class EventsController {
   async getActiveEvents(@Query() params: PaginationDto) {
     // TODO: Check this returns the correct results
     return await this.eventsService.getActiveEvents({
-      page: params.page ?? 1,
-      pageSize: params.pageSize ?? 10,
+      page: params.page ?? 0,
+      pageSize: params.pageSize ?? 0,
     });
   }
 
